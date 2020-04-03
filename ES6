@@ -1,0 +1,2 @@
+实现一个将数组项逐一分发给几个变量： let [first,second..] =arr  如果数组项不足 对应的变量就是undefined
+  

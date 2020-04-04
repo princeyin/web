@@ -1,2 +1,50 @@
-实现一个将数组项逐一分发给几个变量： let [first,second..] =arr  如果数组项不足 对应的变量就是undefined
+1.声明一个块级作用域 let block = 'only'  在同一个作用域中，不能对同一个变量名进行第二次声明，不管第一次是不是用let声明的
+2.声明一个常量 const only = onchange  值不能修改，在同一个作用域中，不能对同一个变量名声明两次
+var name = 'kunood'  console.log(window.name == name) //true
+let name = 'kunood'  console.log(window.name == name) //false
+const name = 'kunood'  console.log(window.name == name) //false
+  后面两种都是块级作用域声明方式
+  for(var i = 0; i < 10; i++){setTimeout(function(){console.log(i)},1000)}//10个10
+  for(let i = 0; i < 10; i++){setTimeout(function(){console.log(i)},1000)}//0-9
+  let声明一个块级作用域的 i 第二次执行循环的i 跟第一个i是不同的内存地址
+
+解构：let [first,second..] =arr  如果数组项不足 对应的变量就是undefined
+     let {name:info,age:number} = {name:'kunood',age:18}; 接收数据的变量名，不用加引号
+@模板字符串拼接变量 ： `字符串${name}`  反引号包裹全部，${} 解析变量  反引号之间是可以嵌套的
+  1.多行字符串，如果使用模板字符串，任何被包裹在两个反引号之间的字符都会被认为是有效的字符串内容，包括换行字符。所以。
+    `line1
+    line2`//等价于'line1\n' + 'line2'  `line1\nline2`
+  2.带标签的模板字符串
+    标签使您可以用函数解析模板字符串。标签函数的第一个参数包含一个字符串值的数组。其余的参数与表达式相关
+    const = fnName`xxxx`; fnName---function name(stringArr,...values)  ...values ==模板字符串中所有的${} 它是一个数组
+    stringArr是一个数组，它包含了模板字符串的普通文本，每一项就是${}隔开的字符串，如果模板字符串的开头或结尾是${},那么它在数组中项的值就是undefined
+  3.原始字符串在标签函数的第一个参数中，存在一个特殊的属性raw ，我们可以通过它来访问模板字符串的原始字符串
+    
+
+一、变量提升(hoisting)
+  js会将当前作用域的所有变量的声明提升到程序的顶部，执行代码js经历编译和执行阶段，而js在编译阶段的时候，会搜集所有的变量声明并且提前声明变量
+  即  console.log(name)             编译： var name;
+      var name = 'kunood',          执行： console.log(name); name = 'kunood'
+  函数声明高于一切，毕竟函数是js的第一公民
+        foo(); //编译 var foo; var foo=fn 执行：执行foo()  foo=2
+        function foo() {
+            console.log('foo'); // foo
+        }
+        var foo = 2;
+       console.log(typeof foo);//number
+  Temporal dead zone 暂时性死区  TDZ禁止在未声明之前访问变量
+  TDZ影响到的语句  cosnt  let  class语句
   
+二、箭头函数
+  1.匿名函数 变成箭头函数  去掉function关键字，没有参数空括号+箭头 （)=>{return false}
+    一个参数省略括号+箭头  arg=>{return false}
+    多个参数逗号隔开+箭头  (arg1,arg2,arg3..)=>{return false}
+    如果想将具名函数变成箭头函数 可以使用函数表达式
+  2.隐性返回：如果一个函数只想单纯的返回一些数据 可以省略大括号和 return  只留下表达式或值 ()=> n+m
+  3.箭头函数的 this 指向 ：箭头函数的this是在定义函数时绑定的，不是在执行过程中绑定的。简单的说，函数在定义时，this就继承了定义函数的对象。
+  4.箭头函数不使用场景：当需要重新绑定this值时，不能使用箭头函数
+    一个构造函数：实例化一个对象的时候需要将this绑定到当前对象，而箭头函数this不能重新绑定
+    当你需要arguments对象时，不能用箭头函数，因为他没有
+
+三、参数默认值
+    function sum(a=3,b=4)

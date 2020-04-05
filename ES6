@@ -84,5 +84,19 @@ const name = 'kunood'  console.log(window.name == name) //false
   3.对象的计算属性  {[]:xx}  [] 就相当于模板字符串的${} 里面可使用变量、表达式
   
 Promise：
+  1.promise 解决了异步请求的回调地狱
+  2.let ajaxs = new Promise((resolve,reject)=>{
+              //请求...
+              if(respon){ 
+                resolve(data) //请求成功 调用内置的reslove()函数
+               }else{
+                 reject(msgerr)//请求失败，调用reject()函数
+  })
   
-
+ 3.对请求的最终结果进行监听
+   ajaxs.then(data=>{xx}).catch(err=>{xxx})
+ Promise.all方法用来包装许多个Promise实例，然后组成了一个新的Promise对象，新的Promise对象的状态由前面几个被包裹的Promise对象的状态决定，
+ 如果前面的Promise都被resolve了，那么新的Promise的状态也是resolve的；只要有一个Promise被reject了，那么组成的新的Promise的状态也是reject的。
+ 
+ Promise.race方法和上面的Promise.all有点类似，都是包装许多的Promise对象，然后组成了一个新的Promise对象，但是使用Promise.race的含义是：
+ 只要包裹的的Promise对象中有一个的状态发生了改变那么组成的这个新的Promise对象的状态就是上面那个率先改变的Promise实例的状态。

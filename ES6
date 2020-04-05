@@ -76,4 +76,13 @@ const name = 'kunood'  console.log(window.name == name) //false
 可扩展运算符
   扩展运算符是三个点（...）。用于取出参数对象的所有可遍历属性，然后拷贝到当前对象之中
   如果你执行 const arr2 = arr1 你修改arr2，arr1也会变，你可以这样 const arr2 = [...arr1]
+  在参数中使用，function(...arg) 将一个对象的可遍历属性遍历传参
+  
+对象字面量的新特性
+  1.属性简写：  当你的对象的 keyName == valueName  比如 {name:name} 简写 {name}
+  2.方法简写：send:function(){}  ==> send(){}
+  3.对象的计算属性  {[]:xx}  [] 就相当于模板字符串的${} 里面可使用变量、表达式
+  
+Promise：
+  
 

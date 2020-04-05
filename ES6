@@ -9,7 +9,11 @@ const name = 'kunood'  console.log(window.name == name) //false
   let声明一个块级作用域的 i 第二次执行循环的i 跟第一个i是不同的内存地址
 
 解构：let [first,second..] =arr  如果数组项不足 对应的变量就是undefined
-     let {name:info,age:number} = {name:'kunood',age:18}; 接收数据的变量名，不用加引号
+     let [fist,,three,...others] =arr 如果不想取某个值，逗号空出来，...others会接收剩余的项组成一个数组
+     let {name,age} = {name:'kunood',age:18}
+     let {name:info,age:number} = {name:'kunood',age:18}; 重命名变量，不用加引号，防止某个变量已经声明过，导致报错
+     let {name,aga,rank=1080} = {name:'kunood',age:18}  当分配不足时，使用默认值
+     
 @模板字符串拼接变量 ： `字符串${name}`  反引号包裹全部，${} 解析变量  反引号之间是可以嵌套的
   1.多行字符串，如果使用模板字符串，任何被包裹在两个反引号之间的字符都会被认为是有效的字符串内容，包括换行字符。所以。
     `line1
@@ -48,3 +52,14 @@ const name = 'kunood'  console.log(window.name == name) //false
 
 三、参数默认值
     function sum(a=3,b=4)
+   
+四、新增的函数 和方法
+  str.startsWith(search[,positionIndex]) 
+  str.endsWith(search)
+  str.includes(serach)
+  str.repeat(n)
+  
+新的遍历 for(let value of  arr)
+  1.直接遍历数组项的值，但是只是遍历数字索引的项
+  2.相对于foreach的不能跳过和终止， for of  可以的
+  3.不能遍历对象

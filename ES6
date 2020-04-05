@@ -59,7 +59,21 @@ const name = 'kunood'  console.log(window.name == name) //false
   str.includes(serach)
   str.repeat(n)
   
+  2.数组方法
+  Array.from() 返回一 数组 将类数组对象转换成数组对象，比如arguments Nodelist  Array.from(arguments)  
+  const  str = 'hello world'  Array.from(str) //['h','l',...]
+  Array.of()返回一个数组，所传的参数，就是数组的项
+  
+  arr.find(fn) fn的参数 value：数组的项  对数组的每一项调用函数，当数组中的元素在测试条件时返回 true 时, find() 返回符合条件的元素，
+  之后的值不会再调用执行函数--在一个数组中寻找复合条件的项
+  arr.findIndex() 在一个数组中寻找复合条件的项的索引
+  
 新的遍历 for(let value of  arr)
   1.直接遍历数组项的值，但是只是遍历数字索引的项
   2.相对于foreach的不能跳过和终止， for of  可以的
   3.不能遍历对象
+  
+可扩展运算符
+  扩展运算符是三个点（...）。用于取出参数对象的所有可遍历属性，然后拷贝到当前对象之中
+  如果你执行 const arr2 = arr1 你修改arr2，arr1也会变，你可以这样 const arr2 = [...arr1]
+

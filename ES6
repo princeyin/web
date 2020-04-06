@@ -100,3 +100,9 @@ Promise：
  
  Promise.race方法和上面的Promise.all有点类似，都是包装许多的Promise对象，然后组成了一个新的Promise对象，但是使用Promise.race的含义是：
  只要包裹的的Promise对象中有一个的状态发生了改变那么组成的这个新的Promise对象的状态就是上面那个率先改变的Promise实例的状态。
+
+新变量：symbol 生成一个唯一的标志符， 为了解决对象属性名的冲突
+  1. let lisi = Symbol('lisi');
+  2. 如果对象有个Symbol类型的属性，那这个属性不是可枚举属性，不能像平常属性一样访问 synobj[Object.getOwnPropertySymbols(synobj)[0]]
+  
+  

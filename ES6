@@ -248,4 +248,23 @@ import 'regenerator-runtime/runtime';
 require('core-js');
 require('regenerator-runtime/runtime);
 Babel 默认不转码的 API 非常多，详细清单可以查看babel-plugin-transform-runtime模块的definitions.js文件。
+
+关于继承 和原型链
+  实例 -->原型(构造函数)---prototype--原型对象-->原型--原型对象
+   实例  insrtanceof 原型
+class 类
+  1.创建一个类 就跟创建一个构造函数差不多   
+    class Animal{
+       constructor(arg1,arg2){
+          this.name = arg1
+        }
+        function eat(){} //方法
+        static function clip() //静态方法   实例无法访问  ，只能通过类访问 Animal.clip()
+ 2.类的继承
+   class Dog extends Animal{
+          constructor(){
+          super();///继承的关键第二步
+   }   
+     
+  
   

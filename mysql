@@ -1,0 +1,41 @@
+mysql -h localhost -u root -proot   -p和密码不能有空格
+
+ 查看所有的数据库：show databases;
+
+ 进入数据库：use databaseName;
+
+-----------------------------------------------------------------------------------
+
+查看所有表格：show tables;
+
+查看 某个表的字段结构 ：desc tabName;
+
+查询表数据：select  *  from tabName;
+
+  查询某个字段  select colName from tabName;
+
+  查询多个字段  select col1,col2,col3 from tabName;
+
+  字段别名 select col1 as k from tabName;
+
+条件查询：
+
+  1.表达式为真  select col1 from tabName where col1>2;
+
+  2.like not like(%匹配任意多个字符 _匹配单个任意字符) select name from tabName where name like '李_';  
+
+  3.指定范围 in / not in /  between xx and xx select id from tab where in(n,m) 不是取出从n 到m 的id，而是取出 id = n 和 id = m 的数据
+
+  4. is null (假 什么数据都取不出来)  is not null(真  全部取出来)
+
+  5. group by 一般要配合5个聚合函数使用:max,min,sum,avg,coun
+
+  select cat_id,max(shop_price) from ecs_goods group by cat_id;
+
+  6. 排序 order by  select id from think_nav order by id desc;  desc--降序
+
+  7.限制 limit  与order by 一起用 限制只查多少条数据 select id from think_nav order by id limit 2;
+
+  8.having  作用跟where差不多 只是having 不能查原表 他只在查处来的数据中帅选
+
+   select name,sum(score < 60) as gk ,avg(score) as pj from stu group by name having gk >=2;

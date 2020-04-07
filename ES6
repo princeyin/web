@@ -265,6 +265,37 @@ class 类
           constructor(){
           super();///继承的关键第二步
    }   
-     
+  组合式继承：
+              function Animal(name='haha',age=18){
+                this.name = name;
+                this.age = age;
+                console.log('我是构造函数');
+            }
+            function Dog(){
+               Animal.call();
+            }
+            //组合式继承  构造函数会执行两次，
+       Dog.prototype.eat= function(food='meat'){
+                    console.log(`my food is ${food}`);
+                };
+        Dog.prototype = new Animal();
+        let dog = new Dog(); //我是构造函数 我是构造函数
+  寄生式继承：解决了组合式继承调用两次超类型构造函数的问题
   
+        //寄生式继承  借助一个中间原型
+        function Parent(name='kunnod'){
+            this.name = name;
+            this.colors = ['red','green','gray'];
+            console.log('我是构造函数');
+        }  
+        Parent.prototype.getName =  function(){console.log(this.name)};
+        function Child(name,age){
+            Parent.call(this,name);
+            this.age = age;
+        }  
+        function F(){};//中间原型
+        F.prototype = Parent.prototype;
+        Child.prototype = new F(); //借桥搭线
+        let child = new Child('lisi',18); //我是构造函数
+
   

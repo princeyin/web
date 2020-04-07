@@ -43,4 +43,189 @@
   1.$ref 如果作用父组件中子组件的模板文件上  ref="name"  父组件实例就可以通过 this.$refs.name 获取子组件的实例
 
   只能父组件 操作子组件的属性 和方法
+  
+node.js  充当了一个什么角色：单线程服务器--高并发请求  中间服务器以及前端工程化开发服务器
+
+前端框架与库的区别：
+
+  库-由函数封装的一些功能，小而精
+
+  框架--功能齐全，初始化自身的一些行为，操作DOM+发请求+模板引擎+路由功能
+
+安装vue： $ npm install vue--引入packpage中的vue.min.js
+
+Model:模型层，可能是固定写死的数据，更多的是网络请求中获取的数据；
+
+View:视图层，前端开发中通常就是DOM层，主要做用给用户展示各种信息；
+
+ViewModel：视图模型层，视图模型是VIew和Model沟通的桥梁；一方面实现了Data Binding（数据绑定），将Model的改变实时地反映到 View 中；
+另一方面实现了 DOM Listener（DOM监听），当DOM发生一些事件时监听并改变对应的 Data
+
+双向数据绑定 v-model   数据影响视图  视图改变影响数据
+
+ input/textarea：相当于 v-bind:value=msg  v-on:input=msgchange   
+
+  msgchange(e){ this.msg = e.target.value}
+
+checkbox/radio: v-bind:value=msg  v-on:checked
+
+
+
+局部组件
+
+  声子-挂子-用子
+
+组件通信：
+
+  1.父传子(子向父索要零花钱)：子组件自定义属性props:['money'] 
+
+    向父亲索要：parentnode--template:`< div >< childnode :money="parent-money" > < /div >`
+
+   用钱：childnode--template:`< p >{{money}}< /p >`
+
+
+
+  2.子传父：< parentnode >< childnode @ggss="getchild" >  父组件自定义事件
+
+    子组件触发事件：
+
+      childnode--template:`< p @click=send >< /p >`,methods:{send:function(){this.$emit('event',data)}}
+
+    父组件接收：methods:{getchild:function(data)}
+
+插槽
+
+  view层：默认组件中间不允许有内容包括标签，如果你想在中间添加内容，
+
+  你得在Vue.js中的组件使用内置组件< slot >< /slot >占位  template:`< div >< slot >< /slot >< /div >`
+
+  具名插槽：< slot name="one">  视图模板中  给元素添加slot=“one” 属性
+
+-------------
+
+过滤器：filter
+
+  1.全局过滤器：  Vue.filter(‘fnName’,fn);
+
+  2.局部过滤器：在一个vue实例或组件中  filters:{fnName:function(){}}
+
+  3.View模板中使用：  数据 | filter [|filter2]  这个数据会作为函数的第一个参数进行传参
+
+------
+
+监听：watch
+
+  1.监听基本类型属性：watch:{
+
+                           监听的属性:function(newValue,oldValue){ }
+
+               }
+
+  2.监听引用类型属性：用上面方法监听的是地址，没有用，要深度监听
+
+    watch{
+
+         object:{
+
+                    deep:true,
+
+                    handler:function(new,old){ }
+
+         }
+
+计算属性 与 监听
+
+  计算属性怎么完成监听多个属性的改变：
+
+   计算属性有个特性：只要你传入函数的参数改变他就会重新计算 
+
+  计算属性(缓存)与 方法
+
+  计算属性的setter方法：computed:{
+
+                    change:{
+                        outs:function(v){   //这是setter，名字随便起，只要是第一个有参数的函数就是setter函数
+                            console.log(v)
+                        },
+                        inters:function(v){
+                            console.log(v+'1111')
+                        }
+                    }
+                },
+
+----生命周期------
+
+  1.beforeCreate:function()  实例创建之前执行
+
+  2.created:function()  实例创建之后  发ajax请求，接收后端数据
+
+  3.beforeMount:functiion()  挂载数据到DOM之前 
+
+  4.mounted:function()  挂载数据到DOM之后
+
+  5.beforeUpdate:         更新DOM之前
+
+  6.update:                      更新之后
+
+  7.beforeDestroy:     实例销毁之前调用。
+
+  8.destroyed:    
+
+  9.activated        被 keep-alive 缓存的组件激活时调用。
+
+  10.deactivated    被 keep-alive 缓存的组件停用时调用。
+
+-----内置组件----
+
+ 需要缓存的组件或DOM
+
+Vue项目初始化
+
+前端项目技术栈：Vue  vue-router  Element-UI  Axios  Echarts
+
+一、项目初始化
+
+  1.安装Vue脚手架
+
+  2.通过Vue脚手架创建项目
+
+  3.配置Vue路由
+
+  4.配置Element-UI组件库
+
+  5.配置Axios库
+
+  6.初始化Git远程仓库
+
+  7.将本地项目托管到码云或GitHub中
+
+2.1通过Vue脚手架创建项目
+
+   cmd 执行 vue ui --前提是已经安装好vue-cli
+
+  创建项目需要的功能：babel  router linter  使用配置文件
+
+4.1配置Element-UI组件
+
+  项目仪表盘中，添加插件：vue-cli-plugin-element--配置插件为 import-
+
+5.1配置Axios库
+
+  在依赖中，安装Axios插件
+
+6.1码云 http://gitee.com/
+
+7.1 git 相关命令
+
+  在cmd中 进入到指定文件夹，将其设置为Git仓库 git init
+
+  git状态：git status    将所有文件都添加到缓存区：git add .
+
+  上传文件至本地仓库：git commit -m "add files"
+
+  上传至码云：git remote add origin https://gitee.com/kunood/blog.git
+
+                       git push -u origin master
+
+  也可以通过Git GUI Here git图形界面
 

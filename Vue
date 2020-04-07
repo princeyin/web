@@ -1,0 +1,46 @@
+一、父子通信
+
+  1.子组件向父组件索取数据：子组件props 声明一个自定义属性，这个自定义属性使用v-bind绑定在父组件的模板组件上--占位组件(父组件中代替子组件占位的别名元素
+
+  2.子组件执行this.$emit('自定义事件名',数据) 发送数据，父组件在模板组件上 绑定自定义事件接收数据
+
+二、事件总线 
+
+  1. var eventBus = new Vue()
+
+  2.在需要发送数据的组件上，执行eventBus .$emit('自定义事件名',data) 发送数据
+
+  3.在接收数据的组件上，执行eventBus .$on(自定义事件名,data=>{this.xx=xxx}) this不是指向eventBus 
+
+  注意点：事件名不能有大写，短线、下划线链接
+
+三、$attrs $listenter
+
+  $attrs:是一个对象，保存着父组件的模板组件上v-bind绑定数据，除了class style props绑定
+
+  $listeners:也是一个对象，保存着父组件模板组件上v-on绑定的自定义事件函数，除了.native修饰的事件
+
+  1.子组件可以通过$attrs直接获得父组件中模板组件上v-bind绑定数据，如果孙子组件也想获得此数据
+
+    则在子组件的模板组件上v-bind="$attrs"，也可以再绑定添加数据
+
+  2.子组件执行父组件绑定的自定义事件函数： this.$listeners.自定义事件名( )
+
+四、provide往下游提供变量，inject将上游提供的变量注入当前对象 
+
+  1.上游组件：provide:{var1:xx, var2:xx...}  下游组件inject:['var1','var2'..] 如果某个组件本身含有相同的变量名，则无法注入
+
+  2.这种注入并不是响应式的，使用 2.6 Vue.observable优化响应式
+
+   provide(){ this.theme = Vue.observable({ color : "blue" }); return { theme : this.theme }}
+
+  observable() 让一个对象可响应，
+
+  3. 此处响应式有些不理解。等以后学了别的知识再回来看看
+
+五、
+
+  1.$ref 如果作用父组件中子组件的模板文件上  ref="name"  父组件实例就可以通过 this.$refs.name 获取子组件的实例
+
+  只能父组件 操作子组件的属性 和方法
+

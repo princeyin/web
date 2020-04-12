@@ -41,6 +41,7 @@
 五、
 
   1.$ref 如果作用父组件中子组件的模板文件上  ref="name"  父组件实例就可以通过 this.$refs.name 获取子组件的实例
+  那也就可以直接操作子组件的属性和方法 因为 this.$refs.name == obj---soncomponent
 
   只能父组件 操作子组件的属性 和方法
   

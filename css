@@ -1,0 +1,45 @@
+1.1基线与字母x line-height的关系
+  每个行框盒子都有一条基线，基线就在字母x的下边缘， 行距 = line-height - font-size  上行距 = 下行距(有些字体会往基线下沉一点，如果有小数点，上行距向下取整，下行距向上取整) 
+  字母x的交叉点就是内联元素的中线
+1.2单位ex  1ex = 1 font-size  
+   图标居中对齐文字 ： 不管字体如何变化，图标都会居中对齐
+   <span>关闭<i></i></span>
+   i{
+          display: inline-block;
+          background:url('x.png') no-repeat center;
+          background-size: cover;
+          height:1ex;
+          width:20px;
+      }
+1.3 单行文字居中： line-height:height  多行文字居中：将多行文字当成一个内联元素，设置这个元素的vertical-align : middle 
+         #text{
+           display: inline-block;
+           line-height: 20px;
+           width:140px;
+           vertical-align: middle;
+        }
+1.4 line-height的几种单位
+    line-height:1.5    当前元素的font-size * 1.5  就是行高 子元素会继承父元素的行高1.5 也就是子元素的line-height:1.5
+    line-height:150%   当前元素的font-size * 1.5  就是行高 子元素会继承父元素的行高150%*父元素font-size 子元素的line-height:30px  而不是150%
+    line-height:1.5em  当前元素的font-size * 1.5  就是行高 子元素会继承父元素的行高1.5em*父元素font-size 子元素的line-height:30px  而不是1.5em
+1.5 line-height最大值特性     
+    <div id="box">
+         幽灵空白节点(相当于一个字符)<span id="shi">二月三月柳叶新</span> 
+    </div>
+    #box{ line-height:20px}  #shi{line-height:90px}    .box 高度 = 90px  着力点--span元素(line-height并不能改变元素的可视尺寸，但依然可以改变行框盒子的高度)
+    #box{line-height:90px}   #shi{line-height:20px}    .box 高度 = 90px  着力点--幽灵空白节点
+    纯内联元素(非空元素，一定要有文字的 inline-inline元素) 的盒子前面有一个幽灵空白节点
+2.1vertical-align的4类属性值  只能作用于内联元素以及display:table-cell元素  浮动和绝对定位让元素块状化，vertical-align对他们都是无效的
+  线类： baseline(默认)  top middle bottom
+  文本类: text-top text-bottom
+  上标下标类: sub  super
+  数值、百分比类: 20px  2em  20%  可以为负值，往上偏移为正值  百分比的参照值是line-height
+ 2.2 现象1：容器高度比预期的高
+      <div>
+         <span>文字</span>
+       </div>
+       div: line-height:32px    span: font-size:24px    div高度 = 36px  这是因为span撑高了行框盒子 导致父元素高度增加，解决：要让幽灵空白节点的font-size一样大
+     现象2：一个不设置高度的容器总比图片高一点  解决办法：1.图片块状化   2.消灭幽灵空白节点的行距--line-height:0  3.消灭幽灵空白节点 font-size:0  4.改变图片的对齐方式
+ 2.3 vertical-align:baseline  纯内联元素字母x的下边缘  替换元素 就是 元素的下边缘
+      inline-block元素： 1. 里面没有内联元素或者overflow不是visible 该元素的基线就是其margin底边缘
+                         2. 反之就是元素里面的最后一行内联元素的基线

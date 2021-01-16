@@ -48,3 +48,26 @@
 3.2 行框盒子与浮动元素的不可重叠性：行框盒子如果和浮动元素的垂直高度有重叠，则行框盒子在正常定位状态下指挥跟随浮动元素，而不会发生重叠(可以把行框盒子当成一个内联元素)
 3.3 元素浮动后 带来了两个影响， 1 父元素高度塌陷  2 行框盒子区域限制  
 3.4 浮动元素的浮动参考并不是某个元素，而是其所在行的行框盒子
+4.1 那什么时候会触发BFC呢？常见的情况如下：<html>根元素；float的值不为none；overflow的值为auto、scroll或hidden；display的值为table-cell、table-caption和inline-block中的任何一个；
+    position的值不为relative和static。
+ （1）借助overflow属性，如下：.lbf-content { overflow: hidden; }（2）融合display:table-cell和display:inline-block，如下：.lbf-content {    display: table-cell; width: 9999px; 
+  这两种基于BFC的自适应方案均支持无限嵌套，因此，多栏自适应可以通过嵌套方式实现。这两种方案均有一点不足，前者如果子元素要定位到父元素的外面可能会被隐藏，后者无法直接让连续英文字符换行。
+  所以，大家可以根据实际的项目场景选择合适的技术方案。
+4.2 overflow
+  则当子元素内容超出容器宽度高度限制的时候，剪裁的边界是border box的内边缘，而非padding box的内边缘，
+  overflow-x/overflow-y支持的属性值和overflow属性一模一样。visible：默认值。hidden：剪裁。scroll：滚动条区域一直在。auto：不足以滚动时没有滚动条，可以滚动时滚动条出现。
+  PC端，无论是什么浏览器，默认滚动条均来自<html>，而不是<body>标签。在PC端，对<html>标签设置overflow:hidden可以隐藏滚动条禁止滚动，但是在移动端基本上无效。
+  在PC端，窗体滚动高度可以使用document.documentElement.scrollTop获取，但是在移动端，可能就要使用document.body.scrollTop获取。
+  滚动条会占用容器的可用宽度或高度。
+4.3 自定义滚动条
+  ::-webkit-scrollbar {   /* 血槽宽度 */   width: 8px; height: 8px; } ::-webkit-scrollbar-thumb {   /* 拖动条 */   background-color: rgba(0,0,0,.3);   
+  border-radius: 6px; } ::-webkit-scrollbar-track {   /* 背景槽 */   background-color: #ddd;   border-radius: 6px; }
+4.4 单行文字溢出点点点效果。
+  .ell {   text-overflow: ellipsis;   white-space: nowrap;   overflow: hidden; }
+4.5 多行文字溢出点点点效果
+  ell-rows-2 {    display: -webkit-box;    -webkit-box-orient: vertical;    -webkit-line-clamp: 2; }
+4.6 overflow与描点
+  我们的锚链就是一个很简单的#，则定位行为发生的时候，页面是定位到顶部的，所以我们一般实现返回顶部效果都是使用这样的HTML：<a href="#">返回顶部></a>
+  <a href="javascript:">返回顶部</a>  
+4.6 focus瞄点定位：类似于链接、按钮、输入框等可以被focus的元素在被focus时发生的页面重定位现象
+    URL地址锚链定位是让元素定位在浏览器窗口的上边缘，focus瞄点定位是让元素在浏览器窗口范围内显示即可，不一定在上边

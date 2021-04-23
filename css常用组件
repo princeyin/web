@@ -1,0 +1,9 @@
+管道符  比如  登录 |  注册
+css :.wrap a+a::before{
+    content:'';
+    font-size:0;  /* 防止幽灵空白节点，如果继承了父元素的行高，那么高度不好控制*/
+    padding:6px 5px;
+    border-left:1px solid brown;
+    margin-left:5px;  /*padding只提供一侧的间距*/
+    vertical-align: middle; /*防止基线对齐*/
+}
